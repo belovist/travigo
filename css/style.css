@@ -3,7 +3,7 @@
 
 :root {
     /* Apple Dark Theme Colors */
-    --navbar-offset: clamp(40px, 7vw, 64px);
+    --navbar-offset: clamp(40px, 7vw, 49px);
     --bg-primary: #000000;
     --bg-secondary: #1c1c1e;
     --bg-tertiary: #2c2c2e;
