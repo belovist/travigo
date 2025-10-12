@@ -24,25 +24,22 @@ const TravelPlannerApp = (() => {
     const getTrips = () => getStoredJSON(STORAGE_KEYS.trips, []);
     const setTrips = (trips) => setStoredJSON(STORAGE_KEYS.trips, trips);
 
-    const createTrip = ({ name, type, startDate, duration, members, notes }) => ({
+    const createTrip = ({ name, date, people }) => ({
         id: crypto.randomUUID ? crypto.randomUUID() : `trip-${Date.now()}`,
         name,
-        type,
-        startDate,
-        duration,
-        members,
-        notes,
+        date,
+        people: people.filter(person => person.trim()),
+        travelItems: [],
+        hotelItems: [],
+        eventItems: [],
         createdAt: new Date().toISOString(),
     });
 
-    const formatDateRange = (startDate, duration) => {
-        if (!startDate || !duration) return '—';
-        const start = new Date(startDate);
-        if (Number.isNaN(start.getTime())) return '—';
-        const end = new Date(start);
-        end.setDate(start.getDate() + Number(duration) - 1);
-        const opts = { day: 'numeric', month: 'short', year: 'numeric' };
-        return `${start.toLocaleDateString(undefined, opts)} → ${end.toLocaleDateString(undefined, opts)}`;
+    const formatDate = (date) => {
+        if (!date) return '—';
+        const d = new Date(date);
+        if (Number.isNaN(d.getTime())) return '—';
+        return d.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
     };
 
     const renderNavbarGreeting = () => {
@@ -91,14 +88,8 @@ const TravelPlannerApp = (() => {
             grid.appendChild(empty);
         } else {
             trips
-                .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+                .sort((a, b) => new Date(a.date) - new Date(b.date))
                 .forEach((trip) => {
-                    const memberList = Array.isArray(trip.members)
-                        ? trip.members
-                        : String(trip.members || '')
-                            .split(',')
-                            .map((member) => member.trim())
-                            .filter(Boolean);
                     const col = document.createElement('div');
                     col.className = 'col-12 col-sm-6 col-lg-4';
                     col.innerHTML = `
@@ -111,11 +102,10 @@ const TravelPlannerApp = (() => {
                                 </button>
                             </div>
                             <div class="trip-meta">
-                                <div><strong>Type:</strong> ${trip.type}</div>
-                                <div><strong>Dates:</strong> ${formatDateRange(trip.startDate, trip.duration)}</div>
-                                <div><strong>Members:</strong> ${memberList.join(', ') || 'Solo adventure'}</div>
+                                <div><strong>Date:</strong> ${formatDate(trip.date)}</div>
+                                <div><strong>People:</strong> ${trip.people.join(', ') || 'Solo trip'}</div>
                             </div>
-                            <button class="secondary-link text-start" type="button" data-view-trip>View itinerary →</button>
+                            <button class="secondary-link text-start" type="button" data-view-trip>View Details →</button>
                         </article>
                     `;
                     grid.appendChild(col);
@@ -153,17 +143,11 @@ const TravelPlannerApp = (() => {
 
     const addTrip = (tripInput) => {
         const trips = getTrips();
-        const members = tripInput.members
-            .split(',')
-            .map((member) => member.trim())
-            .filter(Boolean);
+        
         const newTrip = createTrip({
             name: tripInput.name.trim(),
-            type: tripInput.type,
-            startDate: tripInput.startDate,
-            duration: Number(tripInput.duration),
-            members,
-            notes: tripInput.notes.trim(),
+            date: tripInput.date,
+            people: tripInput.people
         });
         trips.push(newTrip);
         setTrips(trips);
@@ -178,8 +162,7 @@ const TravelPlannerApp = (() => {
     };
 
     const viewTripDetails = (tripId) => {
-        localStorage.setItem(STORAGE_KEYS.activeTrip, tripId);
-        window.location.href = 'trip.html';
+        window.location.href = `trip-detail.html?tripId=${tripId}`;
     };
 
     const loadTripDetailPage = () => {
@@ -268,7 +251,86 @@ const TravelPlannerApp = (() => {
         const form = document.getElementById('add-trip-form');
         if (!form) return;
         const modalElement = document.getElementById('addTripModal');
-        const modalInstance = modalElement ? bootstrap.Modal.getOrCreateInstance(modalElement) : null;
+        const modal = modalElement ? {
+            show: () => {
+                modalElement.style.display = 'block';
+                modalElement.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            },
+            hide: () => {
+                modalElement.style.display = 'none';
+                modalElement.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        } : null;
+
+        // Add modal trigger functionality
+        const addTripButton = document.querySelector('[data-bs-target="#addTripModal"]');
+        if (addTripButton && modal) {
+            addTripButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.show();
+            });
+        }
+
+        // Add close button functionality
+        const closeButtons = modalElement?.querySelectorAll('[data-bs-dismiss="modal"], .btn-close');
+        closeButtons?.forEach(button => {
+            button.addEventListener('click', () => modal.hide());
+        });
+
+        // Close modal when clicking outside
+        if (modalElement && modal) {
+            modalElement.addEventListener('click', (e) => {
+                if (e.target === modalElement) {
+                    modal.hide();
+                }
+            });
+        }
+
+        // Add person functionality
+        const addPersonBtn = document.getElementById('add-person-btn');
+        const peopleContainer = document.getElementById('people-container');
+        
+        if (addPersonBtn && peopleContainer) {
+            addPersonBtn.addEventListener('click', () => {
+                const personCount = peopleContainer.children.length + 1;
+                const personRow = document.createElement('div');
+                personRow.className = 'person-input-row';
+                personRow.innerHTML = `
+                    <input type="text" class="form-control" placeholder="Person ${personCount}">
+                    <button type="button" class="remove-person-btn">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                `;
+                peopleContainer.appendChild(personRow);
+                
+                // Show remove buttons for all rows except first
+                updateRemoveButtons();
+            });
+        }
+
+        // Remove person functionality
+        if (peopleContainer) {
+            peopleContainer.addEventListener('click', (e) => {
+                if (e.target.closest('.remove-person-btn')) {
+                    e.target.closest('.person-input-row').remove();
+                    updateRemoveButtons();
+                }
+            });
+        }
+
+        const updateRemoveButtons = () => {
+            const rows = peopleContainer.querySelectorAll('.person-input-row');
+            rows.forEach((row, index) => {
+                const removeBtn = row.querySelector('.remove-person-btn');
+                if (index === 0) {
+                    removeBtn.style.display = 'none';
+                } else {
+                    removeBtn.style.display = 'block';
+                }
+            });
+        };
 
         form.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -277,18 +339,38 @@ const TravelPlannerApp = (() => {
                 return;
             }
 
-            addTrip({
-                name: form['trip-name'].value,
-                type: form['trip-type'].value,
-                startDate: form['trip-date'].value,
-                duration: form['trip-duration'].value,
-                members: form['trip-members'].value,
-                notes: form['trip-notes'].value,
-            });
+            // Get all people inputs
+            const peopleInputs = peopleContainer.querySelectorAll('input[type="text"]');
+            const people = Array.from(peopleInputs)
+                .map(input => input.value.trim())
+                .filter(name => name);
 
-            if (modalInstance) modalInstance.hide();
+            if (people.length === 0) {
+                alert('Please add at least one person to the trip.');
+                return;
+            }
+
+            const tripData = {
+                name: form['trip-name'].value,
+                date: form['trip-date'].value,
+                people: people
+            };
+
+            addTrip(tripData);
+
+            if (modal) modal.hide();
             form.reset();
             form.classList.remove('was-validated');
+            
+            // Reset people container
+            peopleContainer.innerHTML = `
+                <div class="person-input-row">
+                    <input type="text" class="form-control" placeholder="Person 1" required>
+                    <button type="button" class="remove-person-btn" style="display: none;">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            `;
         });
     };
 

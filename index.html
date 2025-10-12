@@ -3,25 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TravelPlanner — Plan. Split. Travel Smarter.</title>
+    <title>Travigo — Plan. Split. Travel Smarter.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-VkTXQbN4Z8I+e6BRiF6pHnbVWvBH8A7hxS7AID9zp0LTqE0o39Yj9nE0oYyXW+5K" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="landing">
     <header class="app-navbar">
         <div class="container-xl app-navbar__inner">
-            <a class="app-navbar__logo" href="index.html">TravelPlanner</a>
+            <a class="app-navbar__logo" href="index.html">Travigo</a>
             <button class="app-navbar__toggle d-lg-none" data-action="toggle-nav" aria-label="Toggle navigation" aria-expanded="false">
                 <span></span>
             </button>
-            <nav class="app-navbar__links d-lg-flex align-items-center gap-4">
-                <a href="index.html" class="text-decoration-none">Home</a>
-                <a href="login.html" class="text-decoration-none">Login</a>
-                <a href="about.html" class="text-decoration-none">About</a>
-                <a href="#contact" class="text-decoration-none">Contact</a>
+            <nav class="app-navbar__links">
+                <a href="index.html" class="active">Home</a>
+                <a href="login.html">Login</a>
+                <a href="about.html">About</a>
             </nav>
         </div>
     </header>
@@ -29,59 +27,58 @@
     <main>
         <section class="hero-section">
             <div class="container-xl">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-6" data-reveal>
-                        <div class="hero-copy">
-                            <span class="welcome-pill d-inline-flex align-items-center gap-2"><i class="bi bi-compass"></i> Travel made collaborative</span>
-                            <h1 class="display-4 fw-semibold">Plan every adventure with calm confidence.</h1>
-                            <p class="lead text-secondary">Perfect itineraries, track expenses, and loop in friends without losing the magic of the journey. Travigo keeps plans inspiring, organized, and ready to share.</p>
-                            <ul class="hero-benefits">
-                                <li><i class="bi bi-people"></i> Real-time shared planning across every device</li>
-                                <li><i class="bi bi-wallet2"></i> Budgets that stay on track and update automatically</li>
-                                <li><i class="bi bi-pin-map"></i> Drag-and-drop itineraries with smart location tips</li>
-                            </ul>
-                            <div class="hero-cta">
-                                <a class="primary-button" href="#signup">Start for free</a>
-                                <a class="secondary-link" href="trip.html">Browse a sample trip</a>
-                            </div>
-                            <div class="note-text">Already using Travigo? <a class="secondary-link" href="login.html">Login instead</a>.</div>
+                <div class="d-flex align-items-center" style="min-height: 80vh; gap: 4rem;">
+                    <div class="hero-copy" data-reveal>
+                        <span class="welcome-pill">
+                            <i class="bi bi-compass"></i> 
+                            Travel made collaborative
+                        </span>
+                        <h1>Plan every adventure with calm confidence.</h1>
+                        <p class="lead">Perfect itineraries, track expenses, and loop in friends without losing the magic of the journey. Travigo keeps plans inspiring, organized, and ready to share.</p>
+                        <ul class="hero-benefits">
+                            <li><i class="bi bi-people"></i> Real-time shared planning across every device</li>
+                            <li><i class="bi bi-wallet2"></i> Budgets that stay on track and update automatically</li>
+                            <li><i class="bi bi-pin-map"></i> Drag-and-drop itineraries with smart location tips</li>
+                        </ul>
+                        <div class="hero-cta">
+                            <a class="primary-button" href="#signup">Start for free</a>
+                            <a class="secondary-link" href="trip.html">Browse a sample trip</a>
                         </div>
+                        <div class="note-text">Already using Travigo? <a class="secondary-link" href="login.html">Login instead</a>.</div>
                     </div>
-                    <div class="col-lg-5 ms-lg-auto" data-reveal>
-                        <div class="hero-card surface-card">
-                            <div class="hero-card__image">
-                                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Friends planning a coastal getaway">
-                                <div class="hero-card__badge">
-                                    <span class="hero-card__badge-title">Lisbon long weekend</span>
-                                    <span class="hero-card__badge-meta">4 friends · Budget on track</span>
-                                </div>
+                    <div class="hero-card surface-card" data-reveal>
+                        <div class="hero-card__image">
+                            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Friends planning a coastal getaway">
+                            <div class="hero-card__badge">
+                                <span class="hero-card__badge-title">Lisbon long weekend</span>
+                                <span class="hero-card__badge-meta">4 friends · Budget on track</span>
                             </div>
-                            <form id="signup" class="signup-card needs-validation" aria-labelledby="signup-title" novalidate>
-                                <div class="text-center">
-                                    <h2 id="signup-title" class="fw-semibold mb-1">Create your free workspace</h2>
-                                    <p class="note-text">Start mapping journeys in under a minute.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="full-name" class="form-label">Full Name</label>
-                                    <input type="text" class="form-control" id="full-name" name="full-name" placeholder="Alex Rivera" required>
-                                    <div class="invalid-feedback">Please share your name.</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="alex@example.com" required>
-                                    <div class="invalid-feedback">Enter a valid email address.</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Create a password" required>
-                                    <div class="invalid-feedback">Set a secure password.</div>
-                                </div>
-                                <div class="form-actions">
-                                    <button type="submit" class="primary-button w-100">Create Account</button>
-                                    <div class="note-text text-center">By signing up you agree to our <a class="secondary-link" href="#">Terms</a> and <a class="secondary-link" href="#">Privacy</a>.</div>
-                                </div>
-                            </form>
                         </div>
+                        <form id="signup" class="signup-card needs-validation" aria-labelledby="signup-title" novalidate>
+                            <div class="text-center">
+                                <h2 id="signup-title">Create your free workspace</h2>
+                                <p class="note-text">Start mapping journeys in under a minute.</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="full-name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="full-name" name="full-name" placeholder="Alex Rivera" required>
+                                <div class="invalid-feedback">Please share your name.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="alex@example.com" required>
+                                <div class="invalid-feedback">Enter a valid email address.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Create a password" required>
+                                <div class="invalid-feedback">Set a secure password.</div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="primary-button w-100">Create Account</button>
+                                <div class="note-text text-center">By signing up you agree to our <a class="secondary-link" href="#">Terms</a> and <a class="secondary-link" href="#">Privacy</a>.</div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -89,10 +86,9 @@
     </main>
 
     <footer class="footer" id="contact">
-        ©2025 TravelPlanner — Crafted for effortless adventures.
+        ©2025 Travigo — Crafted for effortless adventures.
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C7tYJ7sKnz03Wx/ju0RduCMsZ/HdlIQK5vCk1vZ1tcHTfb3e8DqRLVQjaxctEg6G" crossorigin="anonymous" defer></script>
     <script src="js/main.js" defer></script>
 </body>
 </html>
