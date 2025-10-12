@@ -70,6 +70,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    padding-top: clamp(70px, 12vw, 92px);
 }
 
 /* Typography */
@@ -175,6 +176,7 @@ a:hover {
     justify-content: flex-start;
     align-items: center;
     gap: var(--spacing-lg);
+    position: relative;
 }
 
 .app-navbar__logo {
@@ -799,12 +801,36 @@ main {
 }
 
 @media (max-width: 992px) {
+    .hero-main-row {
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: auto;
+    }
+
+    .hero-main-row > *:not(:first-child) {
+        margin-top: var(--spacing-2xl);
+    }
+
+    .memorable-copy,
+    .memorable-form {
+        width: 100%;
+    }
+
+    .memorable-copy {
+        gap: var(--spacing-lg);
+    }
+
+    .hero-card {
+        width: 100%;
+    }
+
     .team-grid.team-grid--three-two {
         grid-template-columns: repeat(2, 1fr);
     }
 
     .memorable-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-2xl);
     }
 
     .memorable-form {
@@ -813,6 +839,10 @@ main {
 }
 
 @media (max-width: 576px) {
+    .hero-main-row > *:not(:first-child) {
+        margin-top: var(--spacing-xl);
+    }
+
     .team-grid.team-grid--three-two {
         grid-template-columns: 1fr;
     }
@@ -956,6 +986,7 @@ main {
 
     .app-navbar__toggle {
         display: flex;
+        margin-left: auto;
     }
 
     .app-navbar__links {
@@ -968,11 +999,22 @@ main {
         flex-direction: column;
         padding: var(--spacing-lg);
         gap: var(--spacing-md);
+        align-items: flex-start;
+        width: 100%;
+        box-shadow: var(--shadow-lg);
+        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+        margin-left: 0;
+        margin-top: var(--spacing-sm);
         display: none;
     }
 
     .app-navbar__links.is-open {
         display: flex;
+    }
+
+    .app-navbar__links a {
+        width: 100%;
+        padding: var(--spacing-sm) 0;
     }
 
     .app-navbar__meta {
@@ -1496,9 +1538,13 @@ main {
 .d-block { display: block; }
 .d-none { display: none; }
 
+.flex-wrap { flex-wrap: wrap; }
+
 .justify-content-center { justify-content: center; }
 .justify-content-between { justify-content: space-between; }
 .align-items-center { align-items: center; }
+
+.gap-3 { gap: var(--spacing-md); }
 
 .mb-0 { margin-bottom: 0; }
 .mb-1 { margin-bottom: var(--spacing-xs); }

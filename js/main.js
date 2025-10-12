@@ -408,13 +408,50 @@ const TravelPlannerApp = (() => {
     };
 
     const initNavbarToggle = () => {
-            const navToggle = document.querySelector('[data-action="toggle-nav"]');
-            const navLinks = document.querySelector('.app-navbar__links');
-            if (!navToggle || !navLinks) return;
-            navToggle.addEventListener('click', () => {
+        const toggles = Array.from(document.querySelectorAll('[data-action="toggle-nav"]'));
+        if (!toggles.length) return;
+
+        const getNavLinks = (toggle) => {
+            const navbar = toggle.closest('.app-navbar');
+            return navbar ? navbar.querySelector('.app-navbar__links') : null;
+        };
+
+        const closeNav = (toggle, navLinks) => {
+            if (!navLinks) return;
+            navLinks.classList.remove('is-open');
+            toggle.setAttribute('aria-expanded', 'false');
+        };
+
+        toggles.forEach((toggle) => {
+            const navLinks = getNavLinks(toggle);
+            if (!navLinks) return;
+
+            toggle.addEventListener('click', () => {
                 const isOpen = navLinks.classList.toggle('is-open');
-                navToggle.setAttribute('aria-expanded', String(isOpen));
+                toggle.setAttribute('aria-expanded', String(isOpen));
             });
+
+            navLinks.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => closeNav(toggle, navLinks));
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            toggles.forEach((toggle) => {
+                const navLinks = getNavLinks(toggle);
+                const navbar = toggle.closest('.app-navbar');
+                if (!navLinks || !navbar) return;
+                if (!navbar.contains(event.target)) {
+                    closeNav(toggle, navLinks);
+                }
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                toggles.forEach((toggle) => closeNav(toggle, getNavLinks(toggle)));
+            }
+        });
     };
 
     const initDashboard = () => {
@@ -448,6 +485,7 @@ const TravelPlannerApp = (() => {
                     initDashboard();
                     break;
                 case 'trip':
+                case 'trip-detail':
                     initTripDetail();
                     break;
                 case 'landing':
