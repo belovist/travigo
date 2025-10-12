@@ -3,6 +3,7 @@
 
 :root {
     /* Apple Dark Theme Colors */
+    --navbar-offset: clamp(40px, 7vw, 64px);
     --bg-primary: #000000;
     --bg-secondary: #1c1c1e;
     --bg-tertiary: #2c2c2e;
@@ -70,7 +71,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    padding-top: clamp(70px, 12vw, 92px);
+    padding-top: var(--navbar-offset, clamp(70px, 12vw, 92px));
 }
 
 /* Typography */
@@ -275,8 +276,8 @@ a:hover {
 
 /* Main Content */
 main {
-    margin-top: 80px;
-    min-height: calc(100vh - 80px);
+    padding-top: clamp(12px, 2vw, 24px);
+    min-height: calc(100vh - var(--navbar-offset, clamp(70px, 12vw, 92px)));
 }
 
 .container-xl {
@@ -962,7 +963,7 @@ main {
     padding: var(--spacing-xl) 0;
     text-align: center;
     color: var(--text-secondary);
-    margin-top: var(--spacing-3xl);
+    margin-top: clamp(var(--spacing-xl), 6vw, var(--spacing-2xl));
 }
 
 /* Animations */
