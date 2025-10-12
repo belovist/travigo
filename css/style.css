@@ -172,7 +172,7 @@ a:hover {
     margin: 0 auto;
     padding: 0 var(--spacing-lg);
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     gap: var(--spacing-lg);
 }
@@ -189,6 +189,19 @@ a:hover {
     display: flex;
     align-items: center;
     gap: var(--spacing-xl);
+    margin-left: auto;
+}
+
+.app-navbar__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-left: var(--spacing-lg);
+}
+
+.app-navbar__meta .welcome-pill {
+    margin: 0;
+    padding: var(--spacing-sm) var(--spacing-md);
 }
 
 .app-navbar__links a {
@@ -361,6 +374,11 @@ main {
     align-items: center;
     margin-top: var(--spacing-xl);
     flex-wrap: wrap;
+}
+
+.hero-main-row {
+    min-height: 80vh;
+    gap: var(--spacing-3xl);
 }
 
 /* Cards */
@@ -617,22 +635,34 @@ main {
 
 .trip-detail-header {
     display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-lg);
     margin-bottom: var(--spacing-2xl);
+    text-align: left;
+}
+
+.trip-header-info {
+    text-align: left;
 }
 
 .back-link {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: var(--spacing-sm);
+    background: rgba(0, 122, 255, 0.12);
+    border: 1px solid rgba(0, 122, 255, 0.24);
+    border-radius: var(--radius-full);
     color: var(--accent-blue);
-    font-weight: 500;
-    transition: color var(--transition-fast);
+    font-weight: 600;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    transition: all var(--transition-fast);
 }
 
 .back-link:hover {
-    color: var(--accent-blue-hover);
+    background: rgba(0, 122, 255, 0.2);
+    border-color: rgba(0, 122, 255, 0.4);
+    color: var(--text-primary);
 }
 
 .detail-card {
@@ -752,6 +782,46 @@ main {
     margin: var(--spacing-3xl) 0;
 }
 
+.team-header {
+    text-align: center;
+    display: grid;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.team-header h2 {
+    margin: 0;
+}
+
+/* Force a 3-2 layout on larger screens without breaking auto-fit elsewhere */
+.team-grid.team-grid--three-two {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 992px) {
+    .team-grid.team-grid--three-two {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .memorable-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .memorable-form {
+        padding: var(--spacing-xl);
+    }
+}
+
+@media (max-width: 576px) {
+    .team-grid.team-grid--three-two {
+        grid-template-columns: 1fr;
+    }
+
+    .memorable-section {
+        padding: var(--spacing-3xl) 0;
+    }
+}
+
 .team-card {
     background: var(--bg-secondary);
     border: 1px solid var(--border-primary);
@@ -785,13 +855,74 @@ main {
     object-fit: cover;
 }
 
-.contact-section {
-    background: var(--bg-secondary);
+/* Memorable full-width section */
+.memorable-section {
+    position: relative;
+    margin: var(--spacing-3xl) 0 0;
+    padding: var(--spacing-4xl) 0;
+    background: linear-gradient(135deg, rgba(0, 122, 255, 0.12), transparent 60%);
+    overflow: hidden;
+}
+
+.memorable-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 15% 20%, rgba(175, 82, 222, 0.18), transparent 55%),
+                radial-gradient(circle at 85% 80%, rgba(48, 209, 88, 0.18), transparent 50%);
+    pointer-events: none;
+    opacity: 0.75;
+}
+
+.memorable-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 430px);
+    gap: var(--spacing-2xl);
+    align-items: stretch;
+}
+
+.memorable-copy {
+    display: grid;
+    gap: var(--spacing-lg);
+    align-content: start;
+}
+
+.memorable-copy .lead {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+.memorable-points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+.memorable-points li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    background: rgba(17, 17, 18, 0.6);
     border: 1px solid var(--border-primary);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    font-weight: 500;
+}
+
+.memorable-points i {
+    color: var(--accent-blue);
+    font-size: 1.25rem;
+}
+
+.memorable-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
     padding: var(--spacing-2xl);
-    margin: var(--spacing-3xl) auto;
-    max-width: 600px;
+    backdrop-filter: blur(12px);
 }
 
 /* Footer */
@@ -842,6 +973,13 @@ main {
 
     .app-navbar__links.is-open {
         display: flex;
+    }
+
+    .app-navbar__meta {
+        width: 100%;
+        justify-content: flex-start;
+        margin-left: 0;
+        margin-top: var(--spacing-md);
     }
 
     .welcome-pill {
@@ -972,6 +1110,18 @@ main {
     display: flex;
     justify-content: flex-end;
     gap: var(--spacing-md);
+}
+
+.modal-footer button.secondary-link {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-primary);
+    color: var(--text-secondary);
+}
+
+.modal-footer button.secondary-link:hover {
+    background: var(--bg-quaternary);
+    border-color: var(--border-secondary);
+    color: var(--text-primary);
 }
 
 /* Settings Page */
@@ -1105,25 +1255,7 @@ main {
     color: var(--text-primary);
 }
 
-.contact-section {
-    padding: var(--spacing-xl);
-    text-align: center;
-}
-
-.contact-options {
-    display: flex;
-    gap: var(--spacing-md);
-    justify-content: center;
-    margin-top: var(--spacing-lg);
-}
-
 /* Trip Detail Page */
-.trip-detail-header {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-2xl);
-}
 
 .trip-header-info h1 {
     margin: 0 0 var(--spacing-xs);
@@ -1264,6 +1396,22 @@ main {
     transform: scale(1.05);
 }
 
+#add-person-btn {
+    align-self: flex-start;
+    padding: 8px 18px;
+    border: 1px dashed rgba(0, 122, 255, 0.4);
+    background: rgba(0, 122, 255, 0.12);
+    color: var(--accent-blue);
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    margin-top: var(--spacing-md);
+}
+
+#add-person-btn:hover {
+    background: rgba(0, 122, 255, 0.2);
+    border-style: solid;
+}
+
 /* Trip Planning */
 .trip-planning-content {
     margin-top: var(--spacing-xl);
@@ -1401,7 +1549,40 @@ main {
 .secondary-link {
     color: var(--accent-blue);
     font-weight: 500;
-    transition: color var(--transition-fast);
+    transition: color var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    vertical-align: baseline;
+}
+
+a.secondary-link {
+    padding: 4px 0;
+    border: none;
+}
+
+button.secondary-link,
+button.secondary-link:focus-visible,
+.secondary-link.button {
+    padding: 10px 18px;
+    border: 1px solid rgba(0, 122, 255, 0.28);
+    background: rgba(0, 122, 255, 0.12);
+    color: var(--accent-blue);
+}
+
+button.secondary-link:focus-visible {
+    outline: 2px solid rgba(0, 122, 255, 0.5);
+    outline-offset: 2px;
+}
+
+button.secondary-link:hover,
+.secondary-link.button:hover {
+    background: rgba(0, 122, 255, 0.2);
+    border-color: rgba(0, 122, 255, 0.4);
+    color: var(--text-primary);
 }
 
 .secondary-link:hover {

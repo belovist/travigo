@@ -19,8 +19,8 @@
             <nav class="app-navbar__links">
                 <a href="index.html">Home</a>
                 <a href="dashboard.html">Dashboard</a>
-                <a href="trip.html">Trip Details</a>
                 <a href="about.html" class="active">About</a>
+                <a href="login.html">Login</a>
             </nav>
         </div>
     </header>
@@ -35,60 +35,57 @@
 
 
         <section class="container-xl py-5" data-reveal>
-            <div class="text-center mb-5">
-                <span class="welcome-pill mb-3">
-                    <i class="bi bi-people"></i> Meet the team
-                </span>
-                <h2>Designers of delightful journeys</h2>
+            <div class="team-header">
+                <h2>Meet the team</h2>
                 <p class="note-text">Five humans, one shared goal: helping you travel smarter and together.</p>
             </div>
-            <div class="team-grid">
+            <div class="team-grid team-grid--three-two">
                 <article class="team-card surface-card">
                     <div class="team-photo">
-                        <img src="images/profile-placeholder.svg" alt="Alex Rivera" loading="lazy">
+                        <img src="images/vineet.jpg" alt="Alex Rivera" loading="lazy">
                     </div>
                     <div>
-                        <h3>Alex Rivera</h3>
+                        <h3>Vineet kumar</h3>
                         <p class="note-text">Product Lead</p>
                         <p>Crafts intuitive flows that turn complex planning into calm clarity.</p>
                     </div>
                 </article>
                 <article class="team-card surface-card">
                     <div class="team-photo">
-                        <img src="images/profile-placeholder.svg" alt="Taylor Singh" loading="lazy">
+                        <img src="images/sanchita.jpg" alt="Taylor Singh" loading="lazy">
                     </div>
                     <div>
-                        <h3>Taylor Singh</h3>
+                        <h3>Sanchita</h3>
                         <p class="note-text">Experience Architect</p>
                         <p>Translates travel dreams into shareable itineraries you can trust.</p>
                     </div>
                 </article>
                 <article class="team-card surface-card">
                     <div class="team-photo">
-                        <img src="images/profile-placeholder.svg" alt="Mia Kapoor" loading="lazy">
+                        <img src="images/yash.jpg" alt="Mia Kapoor" loading="lazy">
                     </div>
                     <div>
-                        <h3>Mia Kapoor</h3>
+                        <h3>Yash Samtani</h3>
                         <p class="note-text">Community Guide</p>
                         <p>Curates local gems and travel wisdom from our vibrant community.</p>
                     </div>
                 </article>
                 <article class="team-card surface-card">
                     <div class="team-photo">
-                        <img src="images/profile-placeholder.svg" alt="Jordan Lee" loading="lazy">
+                        <img src="images/yashasvi.jpg" alt="Jordan Lee" loading="lazy">
                     </div>
                     <div>
-                        <h3>Jordan Lee</h3>
+                        <h3>Yashasvi Agarwal</h3>
                         <p class="note-text">Engineering Lead</p>
                         <p>Builds the privacy-first infrastructure behind every shared adventure.</p>
                     </div>
                 </article>
                 <article class="team-card surface-card">
                     <div class="team-photo">
-                        <img src="images/profile-placeholder.svg" alt="Sam Chen" loading="lazy">
+                        <img src="images/prachi.jpg" alt="Sam Chen" loading="lazy">
                     </div>
                     <div>
-                        <h3>Sam Chen</h3>
+                        <h3>Prachi Hassani</h3>
                         <p class="note-text">Design Lead</p>
                         <p>Creates beautiful, accessible interfaces that make travel planning effortless.</p>
                     </div>
@@ -96,32 +93,43 @@
             </div>
         </section>
 
-        <section class="container-xl" id="contact" aria-labelledby="contact-title" data-reveal>
-            <div class="contact-section surface-card">
-                <div class="text-center">
-                    <h2 id="contact-title">Let's plan something memorable</h2>
-                    <p class="note-text">We'd love to hear about your next adventure or collaborate with your team.</p>
+        <section class="memorable-section" id="contact" aria-labelledby="contact-title" data-reveal>
+            <div class="memorable-overlay"></div>
+            <div class="container-xl">
+                <div class="memorable-grid">
+                    <div class="memorable-copy">
+                        <span class="welcome-pill mb-3">
+                            <i class="bi bi-send"></i> Plan with us
+                        </span>
+                        <h2 id="contact-title">Let's plan something memorable</h2>
+                        <p class="lead">We’d love to hear about your next adventure or collaborate with your team. Tell us where you’re headed and we’ll help you craft the perfect journey.</p>
+                        <ul class="memorable-points">
+                            <li><i class="bi bi-chat-dots"></i> Dedicated travel designer support</li>
+                            <li><i class="bi bi-geo-alt"></i> Curated stays, eats, and experiences</li>
+                            <li><i class="bi bi-people"></i> Seamless coordination for every companion</li>
+                        </ul>
+                    </div>
+                    <form class="memorable-form surface-card needs-validation" novalidate>
+                        <div class="form-group">
+                            <label for="contact-name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="contact-name" name="contact-name" placeholder="Your name" required>
+                            <div class="invalid-feedback">Let us know who we're speaking with.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="contact-email" name="contact-email" placeholder="you@example.com" required>
+                            <div class="invalid-feedback">We'll need a valid email to reply.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message" class="form-label">Message</label>
+                            <textarea id="contact-message" name="contact-message" class="form-control" placeholder="Tell us about your plans" rows="4" required></textarea>
+                            <div class="invalid-feedback">Share a few details so we can help.</div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="primary-button w-100">Send Message</button>
+                        </div>
+                    </form>
                 </div>
-                <form class="needs-validation" novalidate>
-                    <div class="form-group">
-                        <label for="contact-name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="contact-name" name="contact-name" placeholder="Your name" required>
-                        <div class="invalid-feedback">Let us know who we're speaking with.</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="contact-email" name="contact-email" placeholder="you@example.com" required>
-                        <div class="invalid-feedback">We'll need a valid email to reply.</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-message" class="form-label">Message</label>
-                        <textarea id="contact-message" name="contact-message" class="form-control" placeholder="Tell us about your plans" rows="4" required></textarea>
-                        <div class="invalid-feedback">Share a few details so we can help.</div>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="primary-button">Send Message</button>
-                    </div>
-                </form>
             </div>
         </section>
     </main>
