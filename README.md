@@ -4,7 +4,7 @@ Travigo is a polished, privacy-conscious web prototype for collaborative trip pl
 
 Status: Prototype (static front-end)
 
-Hosted demo: [INSERT_HOSTED_URL_HERE]
+Hosted demo: https://belovist.github.io/travigo/
 
 ## Key Features
 
