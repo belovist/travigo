@@ -57,8 +57,6 @@ python -m http.server 8080; # then open http://localhost:8080
 
 ## License
 
-MIT — see LICENSE (add if applicable)
+MIT — see LICENSE 
 
 ---
-
-If you’d like, tell me the hosted URL and I’ll insert it into the README.
