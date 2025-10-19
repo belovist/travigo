@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="landing">
+    
     <header class="app-navbar">
         <div class="container-xl app-navbar__inner">
             <a class="app-navbar__logo" href="index.html">Travigo</a>
@@ -21,6 +22,10 @@
                 <a href="dashboard.html">Dashboard</a>
                 <a href="about.html">About</a>
                 <a href="login.html">Login</a>
+                <button id="theme-switch" aria-label="Toggle theme">
+                    <img id="darktheme-icon" src="assets/toggleDark.svg" alt="Dark theme">
+                    <img id="lighttheme-icon" src="assets/toggleLight.svg" alt="Light theme">
+                </button>
             </nav>
         </div>
     </header>
@@ -91,5 +96,6 @@
     </footer>
 
     <script src="js/main.js" defer></script>
+    <script type="text/javascript" src="js/themeSwitch.js" defer></script>
 </body>
 </html>

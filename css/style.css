@@ -13,7 +13,9 @@
     --text-secondary: #ebebf5;
     --text-tertiary: #ebebf599;
     --text-quaternary: #ebebf54d;
-    
+
+    --navbar-bg: rgba(0, 0, 0, 0.8);
+
     --accent-blue: #007aff;
     --accent-blue-hover: #0056b3;
     --accent-green: #30d158;
@@ -23,6 +25,57 @@
     
     --border-primary: #38383a;
     --border-secondary: #48484a;
+    
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 50px;
+    
+    --font-display: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-text: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.25s ease;
+    --transition-slow: 0.4s ease;
+    
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    --spacing-3xl: 64px;
+}
+
+.lightmode{
+    --navbar-offset: clamp(40px, 7vw, 49px);
+    --bg-primary:#ffffff;
+    --bg-secondary: #ebebf5;
+    --bg-tertiary: #ebebf599;
+    --bg-quaternary: #ebebf54d;
+    
+    --text-primary: #000000 ;
+    --text-secondary: #1c1c1e;
+    --text-tertiary: #2c2c2e;
+    --text-quaternary: #3a3a3c;
+
+    --navbar-bg: rgba(161, 204, 237, 0.8);
+    
+    --accent-blue: #007aff;
+    --accent-blue-hover: #0056b3;
+    --accent-green: #30d158;
+    --accent-orange: #ff9500;
+    --accent-red: #ff3b30;
+    --accent-purple: #af52de;
+    
+    --border-primary: #d2d2d7;
+    --border-secondary: #e5e5ea;
     
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
@@ -163,7 +216,7 @@ a:hover {
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--navbar-bg);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border-primary);
     padding: var(--spacing-md) 0;
@@ -1684,4 +1737,25 @@ button.secondary-link:hover,
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--border-secondary);
+}
+#theme-switch{
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    border-radius: 50%;
+    border:transparent;
+    background-color: var(--navbar-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#darktheme-icon{
+    display:none;
+} 
+.lightmode #lighttheme-icon{
+    display: none;
+}
+.lightmode #darktheme-icon{
+    display: block;
 }
