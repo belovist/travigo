@@ -477,7 +477,7 @@ main {
     position: absolute;
     bottom: var(--spacing-md);
     left: var(--spacing-md);
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--navbar-bg);
     backdrop-filter: blur(10px);
     border-radius: var(--radius-md);
     padding: var(--spacing-md);
