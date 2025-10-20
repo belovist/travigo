@@ -220,30 +220,45 @@ const TravelPlannerApp = (() => {
         }
     };
 
+    // ---- ACCESSIBILITY/VALIDATION IMPROVEMENT IMPLEMENTATION ----
+    // Error summary for forms
+    function showErrorSummary(formId, summaryId) {
+        const form = document.getElementById(formId);
+        const summary = document.getElementById(summaryId);
+        const errors = [];
+        Array.from(form.elements).forEach(el => {
+            if (el.nodeName === "INPUT" || el.nodeName === "TEXTAREA") {
+                if (!el.checkValidity()) {
+                    el.setAttribute("aria-invalid", "true");
+                    if (el.nextElementSibling && el.nextElementSibling.classList.contains("invalid-feedback")) {
+                        errors.push(el.nextElementSibling.textContent);
+                    }
+                } else {
+                    el.setAttribute("aria-invalid", "false");
+                }
+            }
+        });
+        if (errors.length) {
+            summary.innerHTML = `<b>Please correct the following:</b><ul>` + errors.map(e => `<li>${e}</li>`).join('') + `</ul>`;
+            summary.classList.remove("d-none");
+            form.classList.add("was-validated");
+            return false;
+        }
+        summary.classList.add("d-none");
+        return true;
+    }
+
     const initLogin = () => {
         const form = document.getElementById('login-form');
         if (!form) return;
-        const alertBox = document.querySelector('[data-login-alert]');
-
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            if (!form.checkValidity()) {
-                form.classList.add('was-validated');
-                if (alertBox) alertBox.classList.remove('d-none');
-                return;
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (showErrorSummary('login-form', 'error-summary')) {
+                const email = form['login-email'].value.trim();
+                setUser(email);
+                form.reset();
+                window.location.href = 'dashboard.html';
             }
-
-            const email = form.email.value.trim();
-            const password = form.password.value.trim();
-            if (!email || !password) {
-                if (alertBox) alertBox.classList.remove('d-none');
-                return;
-            }
-
-            if (alertBox) alertBox.classList.add('d-none');
-            setUser(email);
-            form.reset();
-            window.location.href = 'dashboard.html';
         });
     };
 
@@ -291,7 +306,7 @@ const TravelPlannerApp = (() => {
         // Add person functionality
         const addPersonBtn = document.getElementById('add-person-btn');
         const peopleContainer = document.getElementById('people-container');
-        
+
         if (addPersonBtn && peopleContainer) {
             addPersonBtn.addEventListener('click', () => {
                 const personCount = peopleContainer.children.length + 1;
@@ -304,7 +319,7 @@ const TravelPlannerApp = (() => {
                     </button>
                 `;
                 peopleContainer.appendChild(personRow);
-                
+
                 // Show remove buttons for all rows except first
                 updateRemoveButtons();
             });
@@ -361,7 +376,7 @@ const TravelPlannerApp = (() => {
             if (modal) modal.hide();
             form.reset();
             form.classList.remove('was-validated');
-            
+
             // Reset people container
             peopleContainer.innerHTML = `
                 <div class="person-input-row">

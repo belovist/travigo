@@ -36,16 +36,17 @@
         <form id="login-form" class="needs-validation" novalidate>
             <div class="form-group">
                 <label for="login-email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="login-email" name="email" placeholder="you@example.com" required>
-                <div class="invalid-feedback">Enter a valid email address.</div>
+                <input type="email" class="form-control" id="login-email" name="email" placeholder="you@example.com" required autocomplete="email" aria-invalid="false">
+                <div class="invalid-feedback" aria-live="polite">Enter a valid email address.</div>
             </div>
             <div class="form-group">
                 <label for="login-password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="login-password" name="password" placeholder="Enter your password" required>
-                <div class="invalid-feedback">Password is required.</div>
+                <input type="password" class="form-control" id="login-password" name="password" placeholder="Enter your password" required autocomplete="current-password" aria-invalid="false">
+                <div class="invalid-feedback" aria-live="polite">Password is required.</div>
             </div>
+            <div id="error-summary" class="alert d-none" aria-live="assertive"></div>
             <div class="form-actions">
-                <button type="submit" class="primary-button w-100">Login</button>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
             </div>
         </form>
         <div class="auth-subtext">Don't have an account? <a class="secondary-link" href="index.html">Sign up</a>.</div>
