@@ -68,21 +68,22 @@
                             </div>
                             <div class="form-group">
                                 <label for="full-name" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="full-name" name="full-name" placeholder="yashasvi" required>
-                                <div class="invalid-feedback">Please share your name.</div>
+                                <input type="text" class="form-control" id="full-name" name="full-name" placeholder="yashasvi" required aria-invalid="false">
+                                <div class="invalid-feedback" aria-live="polite">Please share your name.</div>
                             </div>
                             <div class="form-group">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="yashasvi@example.com" required>
-                                <div class="invalid-feedback">Enter a valid email address.</div>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="yashasvi@example.com" required autocomplete="email" aria-invalid="false">
+                                <div class="invalid-feedback" aria-live="polite">Enter a valid email address.</div>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Create a password" required>
-                                <div class="invalid-feedback">Set a secure password.</div>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Create a password" required minlength="6" aria-invalid="false">
+                                <div class="invalid-feedback" aria-live="polite">Set a secure password.</div>
                             </div>
+                            <div id="error-summary-signup" class="alert d-none" aria-live="assertive"></div>
                             <div class="form-actions">
-                                <button type="submit" class="primary-button w-100">Create Account</button>
+                                <button type="submit" class="btn btn-primary w-100">Create Account</button>
                                 <div class="note-text text-center">By signing up you agree to our <a class="secondary-link" href="#">Terms</a> and <a class="secondary-link" href="#">Privacy</a>.</div>
                             </div>
                         </form>
